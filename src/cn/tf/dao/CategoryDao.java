@@ -13,6 +13,8 @@ public interface CategoryDao {
 	Category findByName(String categoryName);
 
 	void deleteByName(String categoryName);
+
+	Category findOne(String categoryId);
 	
 
 }

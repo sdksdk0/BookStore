@@ -10,6 +10,18 @@ create table categorys(
 );
 
 
+create table books(
+	id varchar(100) primary key,
+	name varchar(100),
+	author varchar(100),
+	price float(8,2),
+	path varchar(100),
+	filename varchar(100),
+	des varchar(255),
+	categoryId varchar(100),
+	CONSTRAINT category_id_fk FOREIGN KEY (categoryId) REFERENCES categorys(id)  
+
+)
 
 
 

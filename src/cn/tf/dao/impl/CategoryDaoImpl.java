@@ -58,6 +58,16 @@ public class CategoryDaoImpl implements CategoryDao  {
 		}
 
 	}
+
+	@Override
+	public Category findOne(String categoryId) {
+		
+		try {
+			return 	qr.query("select * from categorys  where id=? ", new BeanHandler<Category>(Category.class),categoryId);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 	
 	
 	
