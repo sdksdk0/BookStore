@@ -7,7 +7,7 @@ public class Book implements Serializable {
 	private String id;
 	private String name;
 	private String author;
-	private String price;
+	private float price;
 	private String path; // image的存放路径
 	private String filename; // image的文件名
 	private String des;
@@ -39,11 +39,11 @@ public class Book implements Serializable {
 		this.author = author;
 	}
 
-	public String getPrice() {
+	public float getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 

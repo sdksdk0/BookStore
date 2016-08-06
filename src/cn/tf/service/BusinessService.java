@@ -32,6 +32,13 @@ public interface  BusinessService {
 
 	//根据用户要查看的页码，返回封装了所有分页信息的page对象
 	Page findPage(String num);
+
+	
+	//根据用户要查看的页码和种类，返回封装了所有分页信息的page对象
+	Page findPage(String num, String categoryId);
+
+	
+	Book findBookById(String bookId);
 	
 	
 	

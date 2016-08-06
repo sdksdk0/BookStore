@@ -56,7 +56,52 @@ public class BookDaoImpl implements BookDao {
 			throw new RuntimeException(e);
 		}
 	}
+	@Override
+	public int getTotalRecordsNum(String categoryId) {
+		try {
+			Long num=(Long) qr.query("select count(id) from books where categoryId=? ",new ScalarHandler(1),categoryId);
+			return num.intValue();
+		
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+	@Override
+	public List<Book> findPageBooks(int startIndex, int pageSize,
+			String categoryId) {
+		
+		try {
+			List<Book>  books=qr.query("select * from books  where categoryId=?  limit  ?,? ",new BeanListHandler<Book>(Book.class),categoryId,startIndex,pageSize);
+			if(books!=null){
+				for (Book book : books) {
+					String sql = "select * from categorys where id=?";
+					Category category = qr.query(sql, new BeanHandler<Category>(Category.class),categoryId);
+					book.setCategory(category);
+				}
+			}
+			return books;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 	
 	
+	//根据多的查少的
+	@Override
+	public Book findOne(String bookId) {
+		
+		try {
+			Book book = qr.query("select * from books where id=?", new BeanHandler<Book>(Book.class), bookId);
+			if(book!=null){
+					String sql = "select * from categorys where id=(select categoryId from books where id=?)";
+					Category category = qr.query(sql, new BeanHandler<Category>(Category.class), book.getId());
+					book.setCategory(category);
+			}
+			return book;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 }

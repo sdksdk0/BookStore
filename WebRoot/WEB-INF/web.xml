@@ -19,10 +19,19 @@
     <servlet-name>ManageServlet</servlet-name>
     <servlet-class>cn.tf.controller.ManageServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ClientServlet</servlet-name>
+    <servlet-class>cn.tf.controller.ClientServlet</servlet-class>
+  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>ManageServlet</servlet-name>
     <url-pattern>/servlet/ManageServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ClientServlet</servlet-name>
+    <url-pattern>/servlet/ClientServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>

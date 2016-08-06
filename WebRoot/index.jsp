@@ -21,6 +21,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    This is my JSP page. <br>
+   
+   	<jsp:forward  page="/servlet/ClientServlet" >
+   			<jsp:param value="listBooks" name="op" />
+   	</jsp:forward>
+   		 
+   		
+   		
+   
+   
   </body>
 </html>
