@@ -30,4 +30,10 @@ public class BusinessServiceImpl implements BusinessService {
 		return category==null?false:true;
 	}
 
+	@Override
+	public void  delCategory(String categoryName) {
+		categoryDao.deleteByName(categoryName);
+		
+	}
+
 }

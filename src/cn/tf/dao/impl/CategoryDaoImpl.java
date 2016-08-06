@@ -42,16 +42,21 @@ public class CategoryDaoImpl implements CategoryDao  {
 	public Category findByName(String categoryName) {
 		
 		try {
-			return	qr.query("select * from categorys  where name=? ", new BeanHandler<Category>(Category.class),categoryName);
+			return 	qr.query("select * from categorys  where name=? ", new BeanHandler<Category>(Category.class),categoryName);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
 	@Override
-	public Category deleteByName(String categoryName) {
+	public  void deleteByName(String categoryName) {
 		
-		return null;
+		try {
+			  qr.update("delete from categorys where name=? ", categoryName);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
 	}
 	
 	

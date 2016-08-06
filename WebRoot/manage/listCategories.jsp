@@ -21,11 +21,11 @@
 	    				<input type="checkbox" name="ids" value="${c.id}"/>
 	    			</td>
 	    			<td>${vs.count}</td>
-	    			<td id="name">${c.name}</td>
+	    			<td>${c.name}</td>
 	    			<td>${c.des}</td>
 	    			<td>
 	    				[<a href="javascript:update()">修改</a>]
-	    				[<a href="javascript:del(this)">删除</a>]
+	    				[<a href="" onclick="del(this)">删除</a>]
 	    			</td>
 	    		</tr>
     		</c:forEach>
@@ -35,13 +35,12 @@
      <script type="text/javascript" src="../js/jquery-1.11.3.js"  ></script>
      <script type="text/javascript">
 
-			function del(){
-				var name=$(this).attr("name").val();
-				
-			
-				//var name=$("#name").text();
-				alert(name);
-				
+			function del(obj){
+				var Vname=$(obj).parent().prev().prev().text();
+    			$.post("${pageContext.request.contextPath}/servlet/ManageServlet",{op:'delCategory',name:Vname},function(data){
+					
+					
+				});
 			}
 
 

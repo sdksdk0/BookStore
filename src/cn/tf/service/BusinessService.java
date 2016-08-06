@@ -14,5 +14,8 @@ public interface  BusinessService {
 	
 	//根据分类名称查询该分类是否可用
 	boolean isCategoryExists(String categoryName);
+	
+	
+	void delCategory(String categoryName);
 
 }

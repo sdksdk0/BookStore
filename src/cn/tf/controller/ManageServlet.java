@@ -2,6 +2,7 @@ package cn.tf.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -30,11 +31,28 @@ public class ManageServlet extends HttpServlet {
 			listCategories(request,response);
 		}else if("addBookUI".equals(op)){
 			addBookUI(request,response);
+		}else if("delCategory".equals(op)){
+			delCategory(request,response);
 		}
 		
 	}
 
 	
+	//删除书籍
+	private void delCategory(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String name=request.getParameter("name");
+		
+		s.delCategory(name);
+		
+		request.setAttribute("message", "删除成功");
+		//request.getRequestDispatcher("/manage/listCategory.jsp").forward(request, response);
+		
+		response.sendRedirect("/manage/listCategories.jsp?d="+new Date().getTime());
+
+	}
+
+
 	//添加书籍
 	private void addBookUI(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -54,6 +72,7 @@ public class ManageServlet extends HttpServlet {
 		List<Category> cs=s.findAllCategories();
 		request.setAttribute("cs", cs);
 		request.getRequestDispatcher("/manage/listCategories.jsp").forward(request, response);
+		
 		
 	}
 

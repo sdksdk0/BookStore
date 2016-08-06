@@ -12,7 +12,7 @@ public interface CategoryDao {
 
 	Category findByName(String categoryName);
 
-	Category deleteByName(String categoryName);
+	void deleteByName(String categoryName);
 	
 
 }
