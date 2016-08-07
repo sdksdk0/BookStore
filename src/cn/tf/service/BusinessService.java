@@ -5,6 +5,7 @@ import java.util.List;
 import cn.tf.commons.Page;
 import cn.tf.domain.Book;
 import cn.tf.domain.Category;
+import cn.tf.domain.Customer;
 
 public interface  BusinessService {
 	
@@ -40,6 +41,18 @@ public interface  BusinessService {
 	
 	Book findBookById(String bookId);
 	
+	//用户注册
+	void registCustomer(Customer customer);
+	
+	
+	//根据激活码获取用户信息
+	Customer findByCode(String code);
+	
+	//激活客户的账户
+	void activeCustomer(Customer customer);
+	
+	//根据用户名或密码登录，如果账户没有激活就返回null
+	Customer login(String username,String password);
 	
 	
 	

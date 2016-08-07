@@ -6,15 +6,20 @@ import java.util.UUID;
 import cn.tf.commons.Page;
 import cn.tf.dao.BookDao;
 import cn.tf.dao.CategoryDao;
+import cn.tf.dao.CustomerDao;
 import cn.tf.dao.impl.BookDaoImpl;
 import cn.tf.dao.impl.CategoryDaoImpl;
+import cn.tf.dao.impl.CustomerDaoImpl;
 import cn.tf.domain.Book;
 import cn.tf.domain.Category;
+import cn.tf.domain.Customer;
 import cn.tf.service.BusinessService;
 
 public class BusinessServiceImpl implements BusinessService {
 
 	private CategoryDao categoryDao=new CategoryDaoImpl();
+	private CustomerDao customerDao=new CustomerDaoImpl();
+	
 	private BookDao bookDao=new BookDaoImpl();
 	@Override
 	public void addCategory(Category category){// TODO Auto-generated method stub
@@ -90,6 +95,41 @@ public class BusinessServiceImpl implements BusinessService {
 		
 		return bookDao.findOne(bookId);
 
+	}
+
+	@Override
+	public void registCustomer(Customer customer) {
+		customer.setId(UUID.randomUUID().toString());
+		customerDao.save(customer);
+		
+	}
+
+	@Override
+	public Customer findByCode(String code) {
+		
+		return customerDao.findByCode(code);
+	}
+
+	@Override
+	public void activeCustomer(Customer customer) {
+		if(customer==null)
+			throw new RuntimeException("数据不能为空");
+		if(customer.getId()==null)
+			throw new RuntimeException("更新数据的主键不能为空");
+		
+		customerDao.update(customer);
+		
+	}
+
+	@Override
+	public Customer login(String username, String password) {
+		
+		Customer customer = customerDao.find(username,password);
+		if(customer==null)
+			return null;
+		if(!customer.isActived())
+			return null;
+		return customer;
 	}
 
 }
