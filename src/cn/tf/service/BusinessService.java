@@ -7,6 +7,7 @@ import cn.tf.domain.Book;
 import cn.tf.domain.Category;
 import cn.tf.domain.Customer;
 import cn.tf.domain.Order;
+import cn.tf.domain.OrderItem;
 
 public interface  BusinessService {
 	
@@ -57,8 +58,19 @@ public interface  BusinessService {
 
 	//生成订单
 	void genOrder(Order order);
+
+	//根据订单号查找订单
+	Order findOrderByNum(String ordernum);
+
+	//更新订单信息
+	void updateOrder(Order order);
 	
+	//更新订单状态
+	void changeOrderStatus(int status,String ordernum);
+
+	//
+	List<Order> findOrdersByCustomerId(String customerId);
 	
-	
+	List<OrderItem> findOrderItemByCustomerId(String ordernum);
 
 }

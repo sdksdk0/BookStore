@@ -54,7 +54,30 @@ public class ClientServlet extends HttpServlet {
 			logout(request,response);
 		}else if("genOrder".equals(op)){
 			genOrder(request,response);
+		}else if("showOrders".equals(op)){
+			showOrders(request,response);
 		}
+		
+	}
+
+
+	//订单详情
+	private void showOrders(HttpServletRequest request,
+			HttpServletResponse response) throws IOException, ServletException {
+		//检测是否登录； 
+				HttpSession session=request.getSession();
+				Customer customer=(Customer) session.getAttribute("customer");
+				if(customer==null){
+					response.getWriter().write("请先登录");
+					response.setHeader("Refresh", "2;URL="+request.getContextPath());
+					return ;
+				}
+			List<Order>  orders=s.findOrdersByCustomerId(customer.getId());
+			request.setAttribute("orders", orders);
+			
+			request.getRequestDispatcher("/listOrders.jsp").forward(request, response);
+				
+				
 		
 	}
 
@@ -93,6 +116,7 @@ public class ClientServlet extends HttpServlet {
 		//建立和订单的关系
 		order.setItems(oItems);
 		s.genOrder(order);
+		request.setAttribute("order", order);
 		request.getRequestDispatcher("/pay.jsp").forward(request, response);
 		
 		

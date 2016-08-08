@@ -16,6 +16,7 @@ import cn.tf.domain.Book;
 import cn.tf.domain.Category;
 import cn.tf.domain.Customer;
 import cn.tf.domain.Order;
+import cn.tf.domain.OrderItem;
 import cn.tf.service.BusinessService;
 
 public class BusinessServiceImpl implements BusinessService {
@@ -145,6 +146,37 @@ public class BusinessServiceImpl implements BusinessService {
 			throw new RuntimeException("订单的客户不能为空");
 		orderDao.save(order);
 		
+	}
+
+	@Override
+	public Order findOrderByNum(String ordernum) {
+		
+		return orderDao.findByNum(ordernum);
+	}
+
+	@Override
+	public void updateOrder(Order order) {
+		orderDao.update(order);
+		
+	}
+
+	@Override
+	public void changeOrderStatus(int status, String ordernum) {
+		Order order=findOrderByNum(ordernum);
+		order.setStatus(status);
+		updateOrder(order);
+	}
+
+	@Override
+	public List<Order> findOrdersByCustomerId(String customerId) {
+		
+		return orderDao.findByCustomerId(customerId);
+	}
+
+	@Override
+	public List<OrderItem> findOrderItemByCustomerId(String ordernum) {
+	
+		return orderDao.findOrderItem(ordernum);
 	}
 
 }

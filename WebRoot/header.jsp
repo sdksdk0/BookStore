@@ -29,7 +29,7 @@
     </c:if>
     
    
-    <a href="">我的订单</a>
+    <a href="${pageContext.request.contextPath}/servlet/ClientServlet?op=showOrders">我的订单</a>
     <a href="${pageContext.request.contextPath}/showCart.jsp">我的购物车</a>
     <br/>
     

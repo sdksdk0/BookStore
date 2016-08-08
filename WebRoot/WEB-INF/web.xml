@@ -23,6 +23,16 @@
     <servlet-name>ClientServlet</servlet-name>
     <servlet-class>cn.tf.controller.ClientServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>PayServlet</servlet-name>
+    <servlet-class>cn.tf.controller.PayServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ResponsePayServlet</servlet-name>
+    <servlet-class>cn.tf.controller.ResponsePayServlet</servlet-class>
+  </servlet>
+
+
 
 
   <servlet-mapping>
@@ -32,6 +42,14 @@
   <servlet-mapping>
     <servlet-name>ClientServlet</servlet-name>
     <url-pattern>/servlet/ClientServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PayServlet</servlet-name>
+    <url-pattern>/servlet/PayServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ResponsePayServlet</servlet-name>
+    <url-pattern>/servlet/ResponsePayServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>
