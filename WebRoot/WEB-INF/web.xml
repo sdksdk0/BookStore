@@ -31,6 +31,11 @@
     <servlet-name>ResponsePayServlet</servlet-name>
     <servlet-class>cn.tf.controller.ResponsePayServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>cn.tf.controller.LoginServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -50,6 +55,10 @@
   <servlet-mapping>
     <servlet-name>ResponsePayServlet</servlet-name>
     <url-pattern>/servlet/ResponsePayServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/servlet/LoginServlet</url-pattern>
   </servlet-mapping>
 
 </web-app>
