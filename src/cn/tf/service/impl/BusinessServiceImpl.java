@@ -7,18 +7,22 @@ import cn.tf.commons.Page;
 import cn.tf.dao.BookDao;
 import cn.tf.dao.CategoryDao;
 import cn.tf.dao.CustomerDao;
+import cn.tf.dao.OrderDao;
 import cn.tf.dao.impl.BookDaoImpl;
 import cn.tf.dao.impl.CategoryDaoImpl;
 import cn.tf.dao.impl.CustomerDaoImpl;
+import cn.tf.dao.impl.OrderDaoImpl;
 import cn.tf.domain.Book;
 import cn.tf.domain.Category;
 import cn.tf.domain.Customer;
+import cn.tf.domain.Order;
 import cn.tf.service.BusinessService;
 
 public class BusinessServiceImpl implements BusinessService {
 
 	private CategoryDao categoryDao=new CategoryDaoImpl();
 	private CustomerDao customerDao=new CustomerDaoImpl();
+	private OrderDao orderDao=new OrderDaoImpl();
 	
 	private BookDao bookDao=new BookDaoImpl();
 	@Override
@@ -130,6 +134,17 @@ public class BusinessServiceImpl implements BusinessService {
 		if(!customer.isActived())
 			return null;
 		return customer;
+	}
+
+	//生成订单
+	@Override
+	public void genOrder(Order order) {
+		if(order==null)
+				throw new RuntimeException("订单不能为空");
+		if(order.getCustomer()==null)
+			throw new RuntimeException("订单的客户不能为空");
+		orderDao.save(order);
+		
 	}
 
 }

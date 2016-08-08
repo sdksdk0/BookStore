@@ -6,6 +6,7 @@ import cn.tf.commons.Page;
 import cn.tf.domain.Book;
 import cn.tf.domain.Category;
 import cn.tf.domain.Customer;
+import cn.tf.domain.Order;
 
 public interface  BusinessService {
 	
@@ -53,6 +54,9 @@ public interface  BusinessService {
 	
 	//根据用户名或密码登录，如果账户没有激活就返回null
 	Customer login(String username,String password);
+
+	//生成订单
+	void genOrder(Order order);
 	
 	
 	

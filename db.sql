@@ -25,6 +25,9 @@ create table books(
 )
 
 
+
+
+
 --用户表
 create table customers(
 	id varchar(100)  primary key,
@@ -37,8 +40,30 @@ create table customers(
 	actived bit(1) 
 )
 
+--订单表
+create table orders(
+	ordernum varchar(100) primary key,
+	price float(8,2),
+	number int,
+	status int,
+	customerId VARCHAR(100),
+	CONSTRAINT customerId_fk FOREIGN KEY (customerId) REFERENCES customers(id)  
+)
+)
 
+--订单详情表
+create table orderitems(
+	id varchar(100) primary key,
+	number int,
+	price float(8,2),
+	ordernum varchar(100),
+	bookid varchar(100),
+	CONSTRAINT ordernum_fk FOREIGN KEY (ordernum) REFERENCES orders(ordernum),
+	CONSTRAINT bookid_fk FOREIGN KEY (bookid) REFERENCES books(id)    
+)
 
-
-
-
+--订单编号表
+create table ordernum(
+	prefix date,
+	num int	
+)

@@ -1,8 +1,9 @@
 package cn.tf.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -17,8 +18,11 @@ import cn.tf.commons.Page;
 import cn.tf.domain.Book;
 import cn.tf.domain.Category;
 import cn.tf.domain.Customer;
+import cn.tf.domain.Order;
+import cn.tf.domain.OrderItem;
 import cn.tf.service.BusinessService;
 import cn.tf.service.impl.BusinessServiceImpl;
+import cn.tf.utils.OrderNumUtil;
 import cn.tf.utils.SendMailThread;
 import cn.tf.utils.WebUtil;
 
@@ -48,7 +52,49 @@ public class ClientServlet extends HttpServlet {
 			login(request,response);
 		}else if("logout".equals(op)){
 			logout(request,response);
+		}else if("genOrder".equals(op)){
+			genOrder(request,response);
 		}
+		
+	}
+
+
+	//生成订单
+	private void genOrder(HttpServletRequest request,
+			HttpServletResponse response) throws IOException, ServletException  {
+		//检测是否登录； 
+		HttpSession session=request.getSession();
+		Customer customer=(Customer) session.getAttribute("customer");
+		if(customer==null){
+			response.getWriter().write("请先登录");
+			response.setHeader("Refresh", "2;URL="+request.getContextPath());
+			return ;
+		}
+		
+		Cart cart=(Cart) request.getSession().getAttribute("cart");
+		
+		Order order=new Order();
+		order.setOrdernum(OrderNumUtil.genOrderNum());
+		order.setPrice(cart.getPrice());
+		order.setNumber(cart.getNumber());
+		order.setCustomer(customer);
+		
+		
+		List<OrderItem>  oItems=new ArrayList<OrderItem>();
+		//设置订单项
+		for(Map.Entry<String, CartItem>  me:cart.getItems().entrySet()){
+			OrderItem item=new OrderItem();
+			item.setId(UUID.randomUUID().toString());
+			item.setNumber(me.getValue().getNumber());
+			item.setPrice(me.getValue().getPrice());
+			item.setBook(me.getValue().getBook());
+			oItems.add(item);
+		}
+		//建立和订单的关系
+		order.setItems(oItems);
+		s.genOrder(order);
+		request.getRequestDispatcher("/pay.jsp").forward(request, response);
+		
 		
 	}
 

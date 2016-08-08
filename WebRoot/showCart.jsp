@@ -30,7 +30,7 @@
     			<td align="right" colspan="6">
     				总数量：${sessionScope.cart.number}&nbsp;&nbsp;
     				总金额：${sessionScope.cart.price}&nbsp;&nbsp;
-    				<a href="">去结算</a>
+    				<a href="${pageContext.request.contextPath}/servlet/ClientServlet?op=genOrder">去结算</a>
     			</td>
     		</tr>
     	</table>
