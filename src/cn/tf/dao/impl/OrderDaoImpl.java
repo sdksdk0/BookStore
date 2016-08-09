@@ -18,7 +18,7 @@ public class OrderDaoImpl implements OrderDao {
 
 	private QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
 	
-	
+	//保存订单
 	@Override
 	public void save(Order order) {
 		
