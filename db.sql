@@ -33,7 +33,7 @@ create table customers(
 	id varchar(100)  primary key,
 	username varchar(100) not null unique,
 	password varchar(100) not null,
-	photo varchar(20) not null unique,
+	phone varchar(20) not null unique,
 	address varchar(255) not null ,
 	email varchar(20) not null unique,
 	code varchar(200) unique,
